@@ -23,11 +23,7 @@ function getPlayerChoice() {
 function playRound() {
   let computerChoice = getComputerChoice();
   let playerChoice = getPlayerChoice();
-  if (
-    (playerChoice === "rock" && computerChoice === "rock") ||
-    (playerChoice === "paper" && computerChoice === "paper") ||
-    (playerChoice === "scissors" && computerChoice === "scissors")
-  ) {
+  if (playerChoice === computerChoice) {
     totalGames += 1;
     return `It's a tie, you both chose ${computerChoice}`;
   } else if (
