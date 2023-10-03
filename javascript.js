@@ -20,12 +20,12 @@ function getPlayerChoice() {
   return prompt("Choose from Paper, Rock or Scissors only").toLowerCase();
 }
 
-function playRound() {
+function playRound(choice) {
   let computerChoice = getComputerChoice();
-  let playerChoice = getPlayerChoice();
+  let playerChoice = choice;
   if (playerChoice === computerChoice) {
     totalGames += 1;
-    return `It's a tie, you both chose ${computerChoice}`;
+    console.log(`It's a tie, you both chose ${computerChoice}`);
   } else if (
     (playerChoice === "rock" && computerChoice === "scissors") ||
     (playerChoice === "paper" && computerChoice === "rock") ||
@@ -33,7 +33,9 @@ function playRound() {
   ) {
     playerScore += 1;
     totalGames += 1;
-    return `${playerChoice} beats ${computerChoice}. Player wins this round.`.capitalize();
+    console.log(
+      `${playerChoice} beats ${computerChoice}. Player wins this round.`.capitalize()
+    );
   } else if (
     (playerChoice === "scissors" && computerChoice === "rock") ||
     (playerChoice === "rock" && computerChoice === "paper") ||
@@ -41,10 +43,14 @@ function playRound() {
   ) {
     computerScore += 1;
     totalGames += 1;
-    return `${computerChoice} beats ${playerChoice}. Computer wins this round.`.capitalize();
+    console.log(
+      `${computerChoice} beats ${playerChoice}. Computer wins this round.`.capitalize()
+    );
   } else {
     return `Wrong input. Try again.`;
   }
+  playerTextScore.textContent = playerScore;
+  computerTextScore.textContent = computerScore;
 }
 
 function game() {
@@ -64,4 +70,16 @@ function game() {
   console.log(playerScore + " " + computerScore);
 }
 
-game();
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+
+rock.addEventListener("click", () => {
+  playRound("rock");
+});
+paper.addEventListener("click", () => {
+  playRound("paper");
+});
+scissors.addEventListener("click", () => {
+  playRound("scissors");
+});
